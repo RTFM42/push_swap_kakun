@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   util_push.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
+/*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:05 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/12 13:54:33 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:47:15 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_node active_node, t_node passive_node)
+void	push(t_node *active_node, t_node *passive_node)
 {
 	t_node *tmp;
 
 	tmp = active_node->next;
 	active_node->next = tmp->next;
-	active_node = active_node-next;
+	active_node = active_node->next;
 	active_node->prev = tmp->prev;
 	tmp->prev = passive_node;
 	tmp->next = passive_node->next;

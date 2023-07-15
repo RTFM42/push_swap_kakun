@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+         #
+#    By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:08:51 by tokazaki          #+#    #+#              #
-#    Updated: 2023/07/12 14:40:11 by tokazaki         ###   ########.fr        #
+#    Updated: 2023/07/13 20:07:24 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,21 @@ NAME = push_swap
 # Files & Command +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 SRCS_DIR = srcs
 OBJS_DIR = objs
+#OBJS_DIR = ./objs
 
 SRCS = $(addprefix $(SRCS_DIR)/, \
-	push_swap.c)
+		push_swap.c \
+		util_reverse_rotate.c \
+		util_swap.c \
+		util_push.c \
+		util_rotate.c \
+		ps_atoi.c \
+		)
 OBJS = $(SRCS:.c=.o)
+#OBJS	= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I./libft
+CFLAGS = -Wall -Wextra -Werror -I./libft
 RM = rm -f
 
 # Libft & Debug +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
@@ -29,7 +37,7 @@ LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 
 DEBUG			= debug
-CFLAGS_DEBUG	= $(CFLAGS) -g -fsanitize=address
+CFLAGS_DEBUG	= $(CFLAGS) -g srcs/debug.c
 
 # Mandatory target ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 .PHONY: all clean fclean re

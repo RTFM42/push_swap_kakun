@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
+/*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 12:44:01 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/12 13:54:43 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:59:45 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 void	swap(t_node *node)
 {
-	t_node	tmp;
+	t_node	*tmp;
+	int		tmp_value;
 
 	tmp = node->next;
-	node->next = tmp->next;
 	node = tmp->next;
-	node->prev = tmp->prev;
-	tmp->prev = node;
-	tmp->next = node->next;
-	node->next = tmp;
-	node = tmp->next;
-	node->prev = tmp;
+	tmp_value = tmp->value;
+	tmp->value = node->value;
+	node->value = tmp_value;
 }
 
 int	sa(t_node *node)
@@ -47,7 +44,7 @@ int	sb(t_node *node)
 
 int	ss(t_node *a_node, t_node *b_node)
 {
-	if (node == node->next)
+	if (a_node == a_node->next && b_node == b_node->next)
 		return (0);
 	swap(a_node);
 	swap(b_node);
