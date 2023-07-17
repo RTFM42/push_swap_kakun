@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:16:57 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/13 13:23:00 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:30:38 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	rra(t_node *node)
 		return (0);
 	reverse_rotate(node);
 	ft_putstr_fd("rra\n", 1);
-	return(1);
+	return (1);
 }
 
 int	rrb(t_node *node)
@@ -43,7 +43,7 @@ int	rrb(t_node *node)
 		return (0);
 	reverse_rotate(node);
 	ft_putstr_fd("rra\n", 1);
-	return(1);
+	return (1);
 }
 
 int	rrr(t_node *a_node, t_node *b_node)
@@ -53,5 +53,5 @@ int	rrr(t_node *a_node, t_node *b_node)
 	reverse_rotate(a_node);
 	reverse_rotate(b_node);
 	ft_putstr_fd("rrr\n", 1);
-	return(1);
+	return (1);
 }

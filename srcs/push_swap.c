@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:50:24 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/15 15:06:11 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:38:39 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	node_free(t_node *node);
 void	all_free(t_info	*status);
+void	debug(t_info *status);
 
 int	main(int argc, char *argv[])
 {
@@ -24,9 +25,12 @@ int	main(int argc, char *argv[])
 	status = (t_info *)malloc(sizeof(t_info));
 	if (!status)
 		return (0);
+	status->status = 0;
 	process_args_and_make_structs(argc, argv, status);
-
-//	all_free(status);	
+	if (status->status)
+		printf("\nERROR : %d\n\n",status->status);
+	debug(status);
+	all_free(status);
 	return (0);
 }
 

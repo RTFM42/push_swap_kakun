@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 12:44:01 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/13 17:59:45 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:33:34 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	sa(t_node *node)
 		return (0);
 	swap(node);
 	ft_putstr_fd("sa\n", 1);
-	return(1);
+	return (1);
 }
 
 int	sb(t_node *node)
@@ -39,7 +39,7 @@ int	sb(t_node *node)
 		return (0);
 	swap(node);
 	ft_putstr_fd("sb\n", 1);
-	return(1);
+	return (1);
 }
 
 int	ss(t_node *a_node, t_node *b_node)
@@ -49,5 +49,5 @@ int	ss(t_node *a_node, t_node *b_node)
 	swap(a_node);
 	swap(b_node);
 	ft_putstr_fd("ss\n", 1);
-	return(1);
+	return (1);
 }
