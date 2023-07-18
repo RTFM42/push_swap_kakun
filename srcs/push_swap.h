@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:51:08 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/17 17:37:45 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:44:41 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include "libft.h"
 
+# define ONE_ARG -2
+# define OK_SORT -1
 # define A_NODE_ERROR 1
 # define B_NODE_ERROR 2
 # define ARGS_ERROR 3
@@ -38,7 +40,7 @@ typedef struct s_info {
 void	process_args_and_make_structs(int argc, char *argv[], t_info *status);
 void	make_dummy_node(t_info *status);
 void	make_node(int value, t_info *status);
-int		check_args(t_node *a_node);
+void	check_node(t_info *status);
 
 //process args
 int		check_num(char *str, t_info *status);
@@ -46,7 +48,7 @@ int		ps_atoi(const char *str, t_info *status, int *count);
 int		ft_isspace(int c);
 
 //check_sort
-void	check_sotr(t_info *status);
+void	check_sort(t_info *status);
 
 //utils
 int		pa(t_node *a_node, t_node *b_node);

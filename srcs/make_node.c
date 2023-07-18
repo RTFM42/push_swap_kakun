@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/17 17:37:30 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:46:49 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,39 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 			listsize++;
 		}
 		if (status->status != 0)
-		{
 			return ;
-		}
 		i++;
 	}
 	status->list_size = listsize;
+	check_node(status);
+	if (status->status != 0)
+		return ;
 	check_sort(status);
 }
 
-// int	check_args(t_node *a_node)
-// {
-// 	t_node	*tmp;
-// 	int		prevvalue;
+void	check_node(t_info *status)
+{
+	t_node	*a_node;
+	t_node	*tmp;
+	int		prevvalue;
 
-// 	if (a_node->next == a_node->prev)
-// 		return (0);
-// 	tmp = a_node->next;
-// 	prevvalue = a_node->value;
-// 	while (tmp->value != LONG_MAX)
-// 	{
-// 		if (prevvalue > tmp->value)
-// 			return (1);
-// 		prevvalue = tmp->value;
-// 		tmp = tmp->next;
-// 	}
-// 	return (0);
-// }
+	a_node = status->a_node;
+	if (a_node->next == a_node->prev)
+	{
+		status->status = ONE_ARG;
+		return ;
+	}
+	tmp = a_node->next;
+	prevvalue = a_node->value;
+	while (tmp->value != LONG_MAX)
+	{
+		if (prevvalue > tmp->value)
+			return ;
+		prevvalue = tmp->value;
+		tmp = tmp->next;
+	}
+	status->status = OK_SORT;
+}
 //引数が１の場合と順番通りに並んでいた場合の処理
 //それ以外の場合は処理を継続
 
