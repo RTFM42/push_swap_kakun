@@ -6,11 +6,13 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/19 19:31:24 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:24:21 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	make_arry(t_info *status);
 
 void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 {
@@ -42,6 +44,7 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 	check_node(status);
 	if (status->status != 0)
 		return ;
+	make_arry(status);
 	check_sort(status);
 }
 
@@ -95,9 +98,10 @@ void	make_dummy_node(t_info *status)
 	tmp_node->prev = status->b_node;
 }
 
-void	make_compression(t_node *node, t_info *status)
+void	make_arry(t_info *status)
 {
 	int		i;
+	t_node	*node;
 
 	i = 0;
 	status->arry = (t_node **)malloc(sizeof(t_node *) * status->list_size + 1);
@@ -106,14 +110,17 @@ void	make_compression(t_node *node, t_info *status)
 		status->status = -20;
 		return ;
 	}
+//	debug(status);
+	node = status->a_node;
 	node = node->next;
 	while (node->value != LONG_MAX)
 	{
 		status->arry[i] = node;
+//printf("make arry:[%d] : [%ld]\n",i,node->value);
 		node = node->next;
 		i++;
 	}
-	status->arry[i] = NULL;
+	status->arry[i] = status->a_node;
 }
 
 void	make_node(int value, t_info *status)
@@ -135,5 +142,4 @@ void	make_node(int value, t_info *status)
 	dummy->prev = node;
 	tmp_node->next = node;
 	node->prev = tmp_node;
-//	make_compression(node, status);
 }

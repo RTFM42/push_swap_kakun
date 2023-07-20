@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:50:24 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/19 15:12:07 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:22:33 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[])
 	process_args_and_make_structs(argc, argv, status);
 	if (status->status)
 		printf("\nERROR : %d\n\n",status->status);
-	debug(status);
+//	debug(status);
 	all_free(status);
 	return (0);
 }
@@ -52,6 +52,7 @@ void	all_free(t_info	*status)
 {
 	node_free(status->a_node);
 	node_free(status->b_node);
+	free (status->arry);
 	free (status);
 }
 

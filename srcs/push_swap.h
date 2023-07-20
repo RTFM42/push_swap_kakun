@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:51:08 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/19 19:17:50 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:15:54 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ int		ss(t_node *a_node, t_node *b_node);
 int		rra(t_node *node);
 int		rrb(t_node *node);
 int		rrr(t_node *a_node, t_node *b_node);
+
+//debug
+void	debug(t_info *status);
+void	debug_arry(t_info *status);
+
 #endif
