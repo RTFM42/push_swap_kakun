@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:51:08 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/18 16:44:41 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:17:50 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ typedef struct s_node {
 	struct s_node	*prev;
 	struct s_node	*next;
 	long			value;
-	long			number;
+	long			compression;
 }	t_node;
 
 typedef struct s_info {
 	t_node	*a_node;
 	t_node	*b_node;
+	t_node	**arry;;
 	int		list_size;
 	int		status;
 }	t_info;
@@ -51,8 +52,8 @@ int		ft_isspace(int c);
 void	check_sort(t_info *status);
 
 //utils
-int		pa(t_node *a_node, t_node *b_node);
-int		pb(t_node *b_node, t_node *a_node);
+int		pa(t_info *status);
+int		pb(t_info *status);
 int		ra(t_node *node);
 int		rb(t_node *node);
 int		rr(t_node *a_node, t_node *b_node);

@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/18 12:46:49 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:31:24 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,35 @@ void	make_dummy_node(t_info *status)
 		status->status = 3;
 	tmp_node = status->a_node;
 	tmp_node->value = LONG_MAX;
+	tmp_node->compression = LONG_MAX;
 	tmp_node->next = status->a_node;
 	tmp_node->prev = status->a_node;
 	tmp_node = status->b_node;
 	tmp_node->value = LONG_MAX;
+	tmp_node->compression = LONG_MAX;
 	tmp_node->next = status->b_node;
 	tmp_node->prev = status->b_node;
+}
+
+void	make_compression(t_node *node, t_info *status)
+{
+	int		i;
+
+	i = 0;
+	status->arry = (t_node **)malloc(sizeof(t_node *) * status->list_size + 1);
+	if (!status->arry)
+	{
+		status->status = -20;
+		return ;
+	}
+	node = node->next;
+	while (node->value != LONG_MAX)
+	{
+		status->arry[i] = node;
+		node = node->next;
+		i++;
+	}
+	status->arry[i] = NULL;
 }
 
 void	make_node(int value, t_info *status)
@@ -102,11 +125,15 @@ void	make_node(int value, t_info *status)
 	dummy = status->a_node;
 	node = (t_node *)malloc(sizeof(t_node));
 	if (!node)
+	{
+		status->status = -100;
 		return ;
+	}
 	node->value = value;
 	node->next = dummy;
 	tmp_node = dummy->prev;
 	dummy->prev = node;
 	tmp_node->next = node;
 	node->prev = tmp_node;
+//	make_compression(node, status);
 }

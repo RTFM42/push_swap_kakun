@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:10:54 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/17 16:45:02 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:56:31 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	debug(t_info *status)
 		tmp = tmp->next;
 		i++;
 	}
-	printf("b_node[%d] : %ld\n", i, tmp->value);
+	printf("b_node[%d] : %ld\n\n", i, tmp->value);
 }
