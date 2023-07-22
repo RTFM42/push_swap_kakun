@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:19:20 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/20 20:18:56 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:43:18 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,32 +86,62 @@ void sort(t_node *node)
 	sort(node);	
 }
 
-void	sort_4to6args(t_info *status)
+int	serch_node(t_node *a_node,t_node *node)
+{
+	int		point;
+	t_node	*tmp;
+	
+	point = 0;
+	tmp = a_node->next;
+	while (node != tmp)
+	{
+		tmp = tmp->next;
+		point++;
+	}
+//printf("point:%d, value:%ld\n",point,node->value);
+	return (point);
+}
+
+void	over_4args(t_info *status)
 {
 //printf("4 to 6  sort------\n");
 	t_node	*tmp;
+	t_node	*tmp2;
+	t_node	*a_node;
 	int		i;
-	int		j;
+	int		point;
 
-	tmp = status->a_node;
-	tmp = tmp->next;
-	j = 0;	
 	i = 0;
+	a_node = status->a_node;
 	while (i < status->list_size - 3)
 	{
-		if (tmp->compression == status->list_size - i - 1)
+		tmp = a_node->next;
+		tmp2 = a_node->next;
+		point = serch_node(status->a_node, status->arry[i]);
+		if (point == 0);
+		else if (point < (status->list_size - i) / 2)
 		{
-			pa(status);
-			i++;
+			while (point--)
+			{
+				ra(status->a_node);
+			}
 		}
-		tmp = tmp->next;
+		else
+		{
+			point = status->list_size - i - point;
+			while (point--)
+			{
+				rra(status->a_node);
+			}
+		}
+			pb(status);
+			i++;
+//debug(status);
 	}
 	sort_3args(status);
-//debug(status);
 	while (i--)
 	{
-		pb(status);
-		ra(status->a_node);
+		pa(status);
 	}
 }
 
@@ -127,7 +157,7 @@ void	add_compression(t_info *status)
 		arry[i]->compression = i + 1;
 		i++;
 	}
-//	debug_comp(status);
+//debug_comp(status);
 }
 
 void	presort_and_make_compress(t_info *status)
@@ -138,6 +168,7 @@ void	presort_and_make_compress(t_info *status)
 	int		j;
 	t_node	**arry;
 
+	status->status = -1;
 	arry = status->arry;
 	i = 0;
 	while (i < status->list_size)
@@ -148,21 +179,27 @@ void	presort_and_make_compress(t_info *status)
 			tmpi = arry[i];
 			tmpj = arry[j];
 			if (tmpj->value == tmpi->value)
-				status->status = 110;
+			{
+				status->status = -2;
+				return ;
+			}
 			if (tmpj->value < tmpi->value)
 			{
 				arry[i] = tmpj;
 				arry[j] = tmpi;
+				status->status = 0;
 			}
 			j++;
 		}
 		i++;
 	}
 	add_compression(status);
+//debug_arry(status);
 }
 
 void	check_sort(t_info *status)
 {
+//debug(status);
 	presort_and_make_compress(status);
 	if (status->status != 0)
 		return ;
@@ -175,7 +212,7 @@ void	check_sort(t_info *status)
 //	else if (4 <= status->list_size && status->list_size <= 6)
 //		sort_4to6args(status, status->list_size);	
 	else
-		sort_4to6args(status);	
+		over_4args(status);	
 //	printf("kyoumoiiihi\n\n");
 
 }

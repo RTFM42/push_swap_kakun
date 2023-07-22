@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/20 20:24:21 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:57:05 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	check_node(t_info *status)
 		prevvalue = tmp->value;
 		tmp = tmp->next;
 	}
-	status->status = OK_SORT;
 }
 //引数が１の場合と順番通りに並んでいた場合の処理
 //それ以外の場合は処理を継続

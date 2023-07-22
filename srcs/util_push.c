@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:05 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/19 18:19:30 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:15:16 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	push(t_node *active_node, t_node *passive_node)
 	passive_node->prev = tmp;
 }
 
-int	pa(t_info *status)
+int	pb(t_info *status)
 {
 	t_node	*a_node;
 	t_node	*b_node;
@@ -37,11 +37,11 @@ int	pa(t_info *status)
 	if (a_node == a_node->next)
 		return (0);
 	push(a_node, b_node);
-	ft_putstr_fd("pa\n", 1);
+	ft_putstr_fd("pb\n", 1);
 	return (1);
 }
 
-int	pb(t_info *status)
+int	pa(t_info *status)
 {
 	t_node	*a_node;
 	t_node	*b_node;
@@ -51,6 +51,6 @@ int	pb(t_info *status)
 	if (b_node == b_node->next)
 		return (0);
 	push(b_node, a_node);
-	ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("pa\n", 1);
 	return (1);
 }

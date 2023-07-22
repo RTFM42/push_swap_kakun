@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:10:54 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/20 20:39:30 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:36:55 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,37 @@ void	debug_arry(t_info *status)
 
 void	debug_comp(t_info *status)
 {
-	printf("--------debug-compression--------\n");
-	int		i;
-	t_node	*tmp;
-
-	tmp = status->a_node;
-	tmp = tmp->next;
-	i = 0;
-	while (tmp->value != LONG_MAX)
-	{
-		printf("a_node[%d] : %ld\n", i, tmp->compression);
-		tmp = tmp->next;
-		i++;
-	}
-	printf("a_node[%d] : %ld\n", i, tmp->compression);
-	tmp = status->b_node;
-	tmp = tmp->next;
-	i = 0;
-	while (tmp->value != LONG_MAX)
-	{
-		printf("b_node[%d] : %ld\n", i, tmp->compression);
-		tmp = tmp->next;
-		i++;
-	}
-	printf("b_node[%d] : %ld\n\n", i, tmp->compression);
-	printf("-----------------\n");
+(void)status;
+//	printf("--------debug-compression--------\n");
+//	int		i;
+//	t_node	*tmp;
+//
+//	tmp = status->a_node;
+//	tmp = tmp->next;
+//	i = 0;
+//	while (tmp->value != LONG_MAX)
+//	{
+//		printf("a_node[%d] : %ld\n", i, tmp->compression);
+//		tmp = tmp->next;
+//		i++;
+//	}
+//	printf("a_node[%d] : %ld\n", i, tmp->compression);
+//	tmp = status->b_node;
+//	tmp = tmp->next;
+//	i = 0;
+//	while (tmp->value != LONG_MAX)
+//	{
+//		printf("b_node[%d] : %ld\n", i, tmp->compression);
+//		tmp = tmp->next;
+//		i++;
+//	}
+//	printf("b_node[%d] : %ld\n\n", i, tmp->compression);
+//	printf("-----------------\n");
 }
 
 void	debug(t_info *status)
 {
+(void)status;
 	printf("--------debug---------\n");
 	int		i;
 	t_node	*tmp;

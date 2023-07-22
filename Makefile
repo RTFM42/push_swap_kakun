@@ -6,7 +6,7 @@
 #    By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:08:51 by tokazaki          #+#    #+#              #
-#    Updated: 2023/07/19 10:56:08 by tokazaki         ###   ########.fr        #
+#    Updated: 2023/07/22 16:46:32 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,15 @@ OBJS_DIR = objs
 #OBJS_DIR = ./objs
 
 SRCS = $(addprefix $(SRCS_DIR)/, \
-		util_swap.c \
-		util_push.c \
-		util_rotate.c \
-		util_reverse_rotate.c \
 		push_swap.c \
 		make_node.c \
 		process_args.c \
 		debug.c \
 		check_sort.c \
+		util_swap.c \
+		util_push.c \
+		util_rotate.c \
+		util_reverse_rotate.c \
 		)
 OBJS = $(SRCS:.c=.o)
 #OBJS	= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
@@ -53,7 +53,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) 
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
-	@make clean
+#	@make clean
 
 clean:
 	@make -C $(LIBFT_DIR) clean
