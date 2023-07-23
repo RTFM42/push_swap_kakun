@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:50:24 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/22 17:43:20 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:37:58 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	status->status = 0;
 	process_args_and_make_structs(argc, argv, status);
-	if (status->status == -1)
-		return (0);
-	if (status->status == -3)
-		return (0);
-	if (status->status)
+	if (status->status == -1 || status->status == -3);
+	else if (status->status)
 		printf("\nERROR : %d\n\n",status->status);
 //debug(status);
 	all_free(status);
