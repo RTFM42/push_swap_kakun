@@ -104,13 +104,6 @@ static long long int	minus_atoi(const char *str, t_info *status, int *count)
 
 int	ps_atoi(const char *str, t_info *status, int *count)
 {
-	size_t			i;
-	int				flag;
-	long long int	nbr;
-
-	i = 0;
-	nbr = 0;
-	flag = 0;
 	while (ft_isspace(str[*count]))
 		*count = *count + 1;
 	if (str[*count] == '-')

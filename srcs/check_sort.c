@@ -101,6 +101,51 @@ void sort_3args(t_info *status)
 ////printf("point:%d, value:%ld\n",point,node->value);
 //	return (point);
 //}
+void rotate_and_push_b (t_info *status ,t_node *a_node, int min, int max)
+{
+	t_node *tmp;
+	int i;
+	int j;
+	int size;
+
+	i = 0;
+	j = 0;
+	size = status->list_size;
+	while (i < size)
+	{
+		tmp = a_node->next;
+		if (tmp->compression <= max)
+		{
+			pb(status);
+			j++;
+			if (j == max - min)
+				break ;
+		}
+		else
+			ra(a_node);
+		i++;
+	}
+}
+
+void sort_over4(t_info *status)
+{
+	int size;
+	int i;
+	int max;
+	int min;
+
+	i = 0;
+	min = 1;
+	size = status->list_size - 3;
+	while (i <= 10 && size != min)
+	{
+		max = size / 10 * i + size % 10;
+		rotate_and_push_b(status ,status->a_node, min, max);
+		min = max;
+		i++;
+	}
+	sort_3args(status);
+}
 
 int	serch_node(t_node *a_node,t_node *node)
 {
@@ -122,14 +167,14 @@ int	serch_node(t_node *a_node,t_node *node)
 void	rev_4args(t_info *status)
 {
 //printf("4 to 6  sort------\n");
-	t_node	*b_node;
+//	t_node	*b_node;
 	int		i;
 	int		j;
 	int		point;
 
 	j = 0;
 	i = status->list_size - 3;
-	b_node = status->b_node;
+//	b_node = status->b_node;
 	while (i != 0)
 	{
 //debug(status);
@@ -331,7 +376,8 @@ void	check_sort(t_info *status)
 //		sort_4to6args(status, status->list_size);	
 	else
 	{
-		over_4args(status);	
+		//over_4args(status);	
+		sort_over4(status);
 		rev_4args(status);	
 	}
 //	printf("kyoumoiiihi\n\n");
