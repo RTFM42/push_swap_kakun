@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:10:54 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/23 16:45:10 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:09:08 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	debug_comp(t_info *status)
 void	debug(t_info *status)
 {
 (void)status;
-	printf("--------debug---------\n");
+	printf("--------debug--compression-------\n");
 	int		i;
 	t_node	*tmp;
 
@@ -80,21 +80,21 @@ void	debug(t_info *status)
 	i = 0;
 	while (tmp->value != LONG_MAX)
 	{
-		printf("a_node[%d] : %ld\n", i, tmp->value);
+		printf("a_node[%2d] : %2ld : %5ld\n", i, tmp->compression,tmp->value);
 		tmp = tmp->next;
 		i++;
 	}
-	printf("a_node[%d] : %ld\n", i, tmp->value);
+	printf("a_node[%2d] : %2ld : %5ld\n", i, tmp->compression,tmp->value);
 	tmp = status->b_node;
 	tmp = tmp->next;
 	i = 0;
 	while (tmp->value != LONG_MAX)
 	{
-		printf("b_node[%d] : %ld\n", i, tmp->value);
+		printf("b_node[%2d] : %2ld : %5ld\n", i, tmp->compression,tmp->value);
 		tmp = tmp->next;
 		i++;
 	}
-	printf("b_node[%d] : %ld\n\n", i, tmp->value);
+	printf("b_node[%2d] : %2ld : %5ld\n\n", i, tmp->compression,tmp->value);
 	printf("-----------------\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:19:20 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/23 21:31:12 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:56:28 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,63 +45,16 @@ void sort_3args(t_info *status)
 	else if (tmp1->value > tmp2->value && tmp1->value > tmp3->value)
 		ra(status->a_node);
 	else if (tmp1->value > tmp2->value && tmp1->value < tmp3->value)
+	{
 		sa(status->a_node);
+	}
 	else if ((tmp3->value > tmp1->value && tmp3->value < tmp2->value) \
 			|| (tmp1->value < tmp2->value && tmp1->value > tmp3->value))
 		rra(status->a_node);
 	sort_3args(status);	
 }
 
-//void sort(t_node *node)
-//{
-////printf("over sort------\n");
-//	t_node	*tmp1;
-//	t_node	*tmp2;
-//	t_node	*tmp3;
-//
-//	tmp1 = node;
-//	tmp3 = tmp1->prev;
-//	tmp2 = tmp3->prev;
-//	tmp1 = tmp1->next;
-//	if (tmp1->value < tmp2->value && tmp2->value < tmp3->value)
-//	{
-//		return ;
-//	}
-//	else if ((tmp2->value < tmp1->value && tmp1->value < tmp3->value) \
-//		|| (tmp2->value < tmp3->value && tmp3->value < tmp1->value) \
-//		|| (tmp3->value < tmp2->value && tmp2->value < tmp1->value)) 
-//		sa(node);
-//	else if (tmp1->value < tmp3->value && tmp3->value < tmp2->value)
-//	{
-//		ra(node);
-//		sa(node);
-//		rra(node);
-//	}
-//	else if (tmp3->value < tmp1->value && tmp1->value < tmp2->value)
-//	{
-//		ra(node);
-//		sa(node);
-//		rra(node);
-//	}
-//	sort(node);	
-//}
-
-//int	serch_node(t_node *a_node,t_node *node)
-//{
-//	int		point;
-//	t_node	*tmp;
-//	
-//	point = 0;
-//	tmp = a_node->next;
-//	while (node != tmp)
-//	{
-//		tmp = tmp->next;
-//		point++;
-//	}
-////printf("point:%d, value:%ld\n",point,node->value);
-//	return (point);
-//}
-void rotate_and_push_b (t_info *status ,t_node *a_node, int min, int max)
+void rotate_and_push_b(t_info *status ,t_node *a_node, int min, int max)
 {
 	t_node *tmp;
 	int i;
@@ -118,6 +71,8 @@ void rotate_and_push_b (t_info *status ,t_node *a_node, int min, int max)
 		{
 			pb(status);
 			j++;
+//			if (tmp->compression < (max - min) / 2 + min)
+//				rb(status->b_node->next);
 			if (j == max - min)
 				break ;
 		}
@@ -131,19 +86,24 @@ void sort_over4(t_info *status)
 {
 	int size;
 	int i;
+	int j;
 	int max;
 	int min;
 
 	i = 0;
-	min = 1;
+	min = 0;
 	size = status->list_size - 3;
-	while (i <= 10 && size != min)
+	j = 9;
+	if (200 < size)
+		j = 13;
+	while (i <= j && size != min)
 	{
-		max = size / 10 * i + size % 10;
+		max = size / j * i + size % j;
 		rotate_and_push_b(status ,status->a_node, min, max);
 		min = max;
 		i++;
 	}
+//debug(status);
 	sort_3args(status);
 }
 
@@ -159,26 +119,21 @@ int	serch_node(t_node *a_node,t_node *node)
 		tmp = tmp->next;
 		point++;
 	}
-//printf("point:%d, value:%ld\n",point,node->value);
 	return (point);
 }
 
 //大きいnodeから順番に送る
 void	rev_4args(t_info *status)
 {
-//printf("4 to 6  sort------\n");
-//	t_node	*b_node;
 	int		i;
-	int		j;
 	int		point;
 
-	j = 0;
 	i = status->list_size - 3;
-//	b_node = status->b_node;
 	while (i != 0)
 	{
+		point = serch_node(status->b_node, status->arry[i - 1]);
+//printf("point:%d, %d\n",point, i);
 //debug(status);
-		point = serch_node(status->b_node, status->arry[i - j - 1]);
 		if (point == 0);
 		else if (point < i / 2)
 		{
@@ -195,118 +150,13 @@ void	rev_4args(t_info *status)
 				rrb(status->b_node);
 			}
 		}
-			pa(status);
-			i--;
-	}
-}
-
-//void	over_4args(t_info *status)
-//{
-////printf("4 to 6  sort------\n");
-//	t_node	*a_node;
-//	int		i;
-//	int		point;
-//
-//	i = 0;
-//	a_node = status->a_node;
-//	while (i < status->list_size - 3)
-//	{
-//		point = serch_node(status->a_node, status->arry[i]);
 //		while (point--)
-//			ra(status->a_node);
-//		pb(status);
-//		i++;
-//	}
-//	sort_3args(status);
-//}
-
-void	over_4args(t_info *status)
-{
-	t_node	*tmp;
-	int		i;
-	int		j;
-	int		size;
-
-	i = 0;
-	j = 0;
-	size = status->list_size;
-	tmp = status->a_node->next;
-	while (i < status->list_size - 3)
-	{
-		while (i < 2 && j < size -i -3)
-		{
-			if (j == tmp->compression)
-			{
-				pb(status);
-				i++;
-			}
-			ra(status->a_node);
-			tmp = status->a_node;
-			j++;
-		}
+//			rb(status->b_node);
+		pa(status);
+		i--;
 	}
-	sort_3args(status);
 }
 
-//void	over_4args(t_info *status)
-//{
-////printf("4 to 6  sort------\n");
-//	t_node	*a_node;
-//	t_node	*tmp;
-//	int		i;
-//	int		j;
-//	int		max;
-//
-//	i = 1;
-//	j = 0;
-//	a_node = status->a_node;
-//	int size = status->list_size;
-////	while (j < status->list_size - 3)
-////	{
-////		j = 0;
-////		tmp = a_node->next;
-////		max = (status->list_size - i) / 2;
-////		if (status->list_size - 3 <= max)
-////			max = status->list_size - 3;
-////printf("max:%d i:%d\n",max,i);
-////  	while (max < tmp->compression)
-////  	{
-////  		ra(status->a_node);
-////  		tmp = a_node->next;
-////sleep(1);
-////printf("compression:%ld:j:%d\n" ,tmp->compression,j);
-////debug(status);
-////	if (status->list_size < j)
-////		break ;
-////	j++;
-////	}
-////	if (status->list_size <= max)
-////  		pb(status);
-////  	if (i == tmp->compression)
-////	  	i++;
-//
-////どこまで送るか決める
-//	while (j < size - 3)
-//	{
-//		//実際にその数になるまで送る
-//		tmp = status->a_node->next;
-//		max = (size - i)/ 2;
-//	if (size - 3 <= max)
-//		max = size - 3;
-//		while (max < tmp->compression)
-//		{
-//printf("max:%d i:%d\n",max,i);
-//			ra(status->a_node);
-//			tmp = status->a_node->next;
-//			sleep(1);
-//			debug(status);
-//		}
-//		pb(status);
-//		j++;
-//	}
-//debug(status);
-//	sort_3args(status);
-//}
 
 void	add_compression(t_info *status)
 {
@@ -320,7 +170,6 @@ void	add_compression(t_info *status)
 		arry[i]->compression = i + 1;
 		i++;
 	}
-//debug_comp(status);
 }
 
 void	presort_and_make_compress(t_info *status)
@@ -378,6 +227,7 @@ void	check_sort(t_info *status)
 	{
 		//over_4args(status);	
 		sort_over4(status);
+//debug(status);
 		rev_4args(status);	
 	}
 //	printf("kyoumoiiihi\n\n");

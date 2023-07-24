@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 13:55:01 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/17 15:31:54 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:44:50 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	rb(t_node *node)
 	if (node == node->next)
 		return (0);
 	rotate(node);
-	ft_putstr_fd("ra\n", 1);
+	ft_putstr_fd("rb\n", 1);
 	return (1);
 }
 
