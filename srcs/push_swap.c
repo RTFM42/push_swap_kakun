@@ -29,8 +29,7 @@ int	main(int argc, char *argv[])
 	process_args_and_make_structs(argc, argv, status);
 	if (status->status == -1 || status->status == -3);
 	else if (status->status)
-		printf("\nERROR : %d\n\n",status->status);
-//debug(status);
+		ft_putstr_fd("ERROR\n",0);
 	all_free(status);
 	return (0);
 }
@@ -51,9 +50,12 @@ void	node_free(t_node *node)
 
 void	all_free(t_info	*status)
 {
-	node_free(status->a_node);
-	node_free(status->b_node);
-	free (status->arry);
+	if (status->status != A_NODE_ERROR)
+		node_free(status->b_node);
+	if (status->status != B_NODE_ERROR)
+		node_free(status->a_node);
+	if (status->status != B_NODE_ERROR && status->status != A_NODE_ERROR)
+		free (status->arry);
 	free (status);
 }
 

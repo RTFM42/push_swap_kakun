@@ -17,93 +17,83 @@ void	debug_comp(t_info *status);
 
 void sort_2args(t_node *node)
 {
-//printf("sort2\n");
-	t_node	*tmp1;
-	t_node	*tmp2;
+	long	value1;
+	long	value2;
 
-	tmp1 = node;
-	tmp2 = tmp1->prev;
-	tmp1 = tmp1->next;
-	if (tmp1->value < tmp2->value)
+	value1 = node->next->value;
+	value2 = node->prev->value;
+	if (value1 < value2)
 		return;
 	sa(node);
 }
 
 void sort_3args(t_info *status)
 {
-//printf("sort3--------------------------\n");
-	t_node	*tmp1;
-	t_node	*tmp2;
-	t_node	*tmp3;
+	long	value1;
+	long	value2;
+	long	value3;
 
-	tmp1 = status->a_node;
-	tmp3 = tmp1->prev;
-	tmp2 = tmp3->prev;
-	tmp1 = tmp1->next;
-	if (tmp1->value < tmp2->value && tmp2->value < tmp3->value)
+	value1 = status->a_node->next->value;
+	value2 = status->a_node->next->next->value;
+	value3 = status->a_node->next->next->next->value;
+	if (value1 < value2 && value2 < value3)
 		return ;
-	else if (tmp1->value > tmp2->value && tmp1->value > tmp3->value)
+	else if (value2 < value1 && value3 < value1)
 		ra(status->a_node);
-	else if (tmp1->value > tmp2->value && tmp1->value < tmp3->value)
-	{
+	else if (value2 < value1 && value1 < value3)
 		sa(status->a_node);
-	}
-	else if ((tmp3->value > tmp1->value && tmp3->value < tmp2->value) \
-			|| (tmp1->value < tmp2->value && tmp1->value > tmp3->value))
+	else if ((value1 < value3 && value3 < value2) \
+			|| (value3 < value1 && value1 < value2))
 		rra(status->a_node);
 	sort_3args(status);	
 }
 
 void rotate_and_push_b(t_info *status ,t_node *a_node, int min, int max)
 {
-	t_node *tmp;
-	int i;
-	int j;
-	int size;
+	int	nbr;
+	int	nnbr;
+	int count_pb;
 
-	i = 0;
-	j = 0;
-	size = status->list_size;
-	while (i < size)
+	count_pb = 0;
+	while (count_pb < max - min)
 	{
-		tmp = a_node->next;
-		if (tmp->compression <= max)
+		nbr = a_node->next->compression;
+		nnbr = a_node->next->next->compression;
+		if (nbr <= max)
 		{
 			pb(status);
-			j++;
-//			if (tmp->compression < (max - min) / 2 + min)
-//				rb(status->b_node->next);
-			if (j == max - min)
-				break ;
+			count_pb++;
+			if (nbr < (max - min) / 2 + min && max < nnbr)
+					rr(status->a_node,status->b_node);
+			else if (nbr < (max - min) / 2)
+				rb(status->b_node);
 		}
 		else
 			ra(a_node);
-		i++;
 	}
 }
 
 void sort_over4(t_info *status)
 {
 	int size;
-	int i;
-	int j;
+	int div;
 	int max;
 	int min;
+	int i;
 
-	i = 0;
+	i = 1;
 	min = 0;
 	size = status->list_size - 3;
-	j = 9;
+	div = 4;
 	if (200 < size)
-		j = 13;
-	while (i <= j && size != min)
+		div = 8;
+	while (i <= div && size != min)
 	{
-		max = size / j * i + size % j;
+		max = size / div * i + size % div;
 		rotate_and_push_b(status ,status->a_node, min, max);
 		min = max;
 		i++;
 	}
-//debug(status);
 	sort_3args(status);
 }
 
@@ -122,43 +112,94 @@ int	serch_node(t_node *a_node,t_node *node)
 	return (point);
 }
 
-//大きいnodeから順番に送る
-void	rev_4args(t_info *status)
+//void	push_2args(t_info *status, int size, int point, int npoint)
+//{
+//	int	tmp;
+//	int	ntmp;
+//	int	pre;
+//	int	post;
+//	int	mv;
+//
+//	tmp = point;
+//	ntmp = npoint;
+//	if (!(point < size / 2 || point == 0))
+//	{
+//		pre = point
+//		point = (size - point) - 1;
+//		tmp = point * -1;
+//	}
+//	if (!(npoint < (size - 1) / 2 || npoint == 0))
+//	{
+//		npoint = (size - 1 - npoint) - 1;
+//		ntmp = point * -1;
+//	}
+//	mv = post - pre; 
+//	else if (size / 2)
+//}
+//
+//void	rev_args(t_info *status)
+//{
+//	int	size;
+//	int	point;
+//	int	npoint;
+//
+//	size = status->list_size - 3;
+//	while (size != 0 && size != 1)
+//	{
+//		point = serch_node(status->b_node, status->arry[size - 1]);
+//		npoint = serch_node(status->b_node, status->arry[size - 2]);
+//		push_2args(status, size, point, npoint);	
+//
+//
+//		if (point == 0);
+//		else if (point < size / 2)
+//		{
+//			while (point--)
+//				rb(status->b_node);
+//		}
+//		else
+//		{
+//			point = size - point;
+//			while (point--)
+//				rrb(status->b_node);
+//		}
+//
+//		
+//		sort_2args(status->a_node);	
+//		size = size - 2;
+//	}
+//	if (size == 1)
+//		pa(status);
+//}
+
+void	rev_args(t_info *status)
 {
-	int		i;
+	int		size;
 	int		point;
 
-	i = status->list_size - 3;
-	while (i != 0)
+	size = status->list_size - 3;
+	while (size != 0)
 	{
-		point = serch_node(status->b_node, status->arry[i - 1]);
-//printf("point:%d, %d\n",point, i);
-//debug(status);
+		point = serch_node(status->b_node, status->arry[size - 1]);
 		if (point == 0);
-		else if (point < i / 2)
+		else if (point < size / 2)
 		{
 			while (point--)
-			{
 				rb(status->b_node);
-			}
 		}
 		else
 		{
-			point = i - point;
+			point = size - point;
 			while (point--)
-			{
 				rrb(status->b_node);
-			}
 		}
-//		while (point--)
-//			rb(status->b_node);
 		pa(status);
-		i--;
+		size--;
 	}
 }
 
 
-void	add_compression(t_info *status)
+void	make_compression(t_info *status)
 {
 	long	i;
 	t_node	**arry;
@@ -205,13 +246,11 @@ void	presort_and_make_compress(t_info *status)
 		}
 		i++;
 	}
-	add_compression(status);
-//debug_arry(status);
+	make_compression(status);
 }
 
 void	check_sort(t_info *status)
 {
-//debug(status);
 	presort_and_make_compress(status);
 	if (status->status != 0)
 		return ;
@@ -221,15 +260,9 @@ void	check_sort(t_info *status)
 		sort_2args(status->a_node);	
 	else if (status->list_size == 3)
 		sort_3args(status);
-//	else if (4 <= status->list_size && status->list_size <= 6)
-//		sort_4to6args(status, status->list_size);	
 	else
 	{
-		//over_4args(status);	
 		sort_over4(status);
-//debug(status);
-		rev_4args(status);	
+		rev_args(status);	
 	}
-//	printf("kyoumoiiihi\n\n");
-//debug(status);
 }

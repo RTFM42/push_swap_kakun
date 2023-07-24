@@ -16,7 +16,7 @@
 __attribute__((destructor))
 static void	destructor(void)
 {
-//	system("leaks -q push_swap");
+	system("leaks -q push_swap");
 }
 
 void	debug_arry(t_info *status)
