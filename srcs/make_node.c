@@ -25,7 +25,7 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 	while (i < argc && status->status == 0)
 	{
 		j = 0;
-		while (argv[i][j] != '\0' && status->status == 0)
+		while (argv[i][j] != '\0' && status->status == 0 && check_num(argv[i], status) == 0)
 		{
 			count = 0;
 			make_node(ps_atoi(&argv[i][j], status, &count), status);

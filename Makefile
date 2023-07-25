@@ -22,11 +22,11 @@ SRCS = $(addprefix $(SRCS_DIR)/, \
 		push_swap.c \
 		make_node.c \
 		process_args.c \
-		debug.c \
+		make_compression.c \
 		check_sort.c \
 		sort_under_3args.c \
 		utils.c \
-		make_compression.c \
+		debug.c \
 		$(addprefix operations/, \
 		util_swap.c \
 		util_push.c \
@@ -60,14 +60,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) 
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
-#	@make clean
+#@make clean
 
 clean:
-	@make -C $(LIBFT_DIR) clean
+	make -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS) $(B_OBJS)
 
 fclean: clean
-	@make -C $(LIBFT_DIR) fclean
+	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 	$(RM)r $(NAME).dSYM
 
@@ -79,6 +79,6 @@ $(DEBUG):
 	$(CC) $(OBJS) $(CFLAGS_DEBUG) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR) all
+	make -C $(LIBFT_DIR) all
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#

@@ -31,6 +31,8 @@ int	main(int argc, char *argv[])
 		;
 	else if (status->status)
 		ft_putstr_fd("ERROR\n", 0);
+//	debug(status);
+	exit (0);
 	all_free(status);
 	return (0);
 }
