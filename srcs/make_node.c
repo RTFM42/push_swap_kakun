@@ -6,13 +6,11 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/21 12:57:05 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:10:04 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	make_arry(t_info *status);
 
 void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 {
@@ -24,67 +22,45 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 	listsize = 0;
 	i = 1;
 	make_dummy_node(status);
-	while (i < argc)
+	while (i < argc && status->status == 0)
 	{
 		j = 0;
-		while (argv[i][j] != '\0')
+		while (argv[i][j] != '\0' && status->status == 0)
 		{
-			if (check_num(&argv[i][j], status) == 1)
-				break ;
 			count = 0;
 			make_node(ps_atoi(&argv[i][j], status, &count), status);
 			j += count;
 			listsize++;
 		}
-		if (status->status != 0)
-			return ;
 		i++;
 	}
 	status->list_size = listsize;
-	check_node(status);
-	if (status->status != 0)
-		return ;
-	make_arry(status);
 	check_sort(status);
 }
 
+//引数が１つの場合は戻す
 void	check_node(t_info *status)
 {
 	t_node	*a_node;
-	t_node	*tmp;
-	int		prevvalue;
 
 	a_node = status->a_node;
 	if (a_node->next == a_node->prev)
-	{
 		status->status = ONE_ARG;
-		return ;
-	}
-	tmp = a_node->next;
-	prevvalue = a_node->value;
-	while (tmp->value != LONG_MAX)
-	{
-		if (prevvalue > tmp->value)
-			return ;
-		prevvalue = tmp->value;
-		tmp = tmp->next;
-	}
 }
-//引数が１の場合と順番通りに並んでいた場合の処理
-//それ以外の場合は処理を継続
 
+//dummynodeを作成する
 void	make_dummy_node(t_info *status)
 {
 	t_node	*tmp_node;
 
 	status->a_node = (t_node *)malloc(sizeof(t_node));
 	status->b_node = (t_node *)malloc(sizeof(t_node));
-	if (status->a_node == NULL && status->b_node == NULL)
-		status->status = 1;
 	if (status->a_node == NULL)
-		status->status = 2;
+		status->status = A_NODE_ERROR;
 	if (status->b_node == NULL)
-		status->status = 3;
+		status->status = B_NODE_ERROR;
+	if (status->a_node == NULL && status->b_node == NULL)
+		status->status = BOTH_NODE_ERROR;
 	tmp_node = status->a_node;
 	tmp_node->value = LONG_MAX;
 	tmp_node->compression = LONG_MAX;
@@ -97,6 +73,7 @@ void	make_dummy_node(t_info *status)
 	tmp_node->prev = status->b_node;
 }
 
+//構造体のアドレスの配列を作成する
 void	make_arry(t_info *status)
 {
 	int		i;
@@ -109,19 +86,18 @@ void	make_arry(t_info *status)
 		status->status = -20;
 		return ;
 	}
-//	debug(status);
 	node = status->a_node;
 	node = node->next;
 	while (node->value != LONG_MAX)
 	{
 		status->arry[i] = node;
-//printf("make arry:[%d] : [%ld]\n",i,node->value);
 		node = node->next;
 		i++;
 	}
 	status->arry[i] = status->a_node;
 }
 
+//nodeを作成する
 void	make_node(int value, t_info *status)
 {
 	t_node	*node;
@@ -132,7 +108,7 @@ void	make_node(int value, t_info *status)
 	node = (t_node *)malloc(sizeof(t_node));
 	if (!node)
 	{
-		status->status = -100;
+		status->status = NODE_ERROR;
 		return ;
 	}
 	node->value = value;

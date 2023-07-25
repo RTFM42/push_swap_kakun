@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:10:54 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/24 19:09:08 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:25:51 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 __attribute__((destructor))
 static void	destructor(void)
 {
-	system("leaks -q push_swap");
+//	system("leaks -q push_swap");
 }
 
 void	debug_arry(t_info *status)

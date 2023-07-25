@@ -6,7 +6,7 @@
 #    By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:08:51 by tokazaki          #+#    #+#              #
-#    Updated: 2023/07/22 16:46:32 by tokazaki         ###   ########.fr        #
+#    Updated: 2023/07/25 21:19:05 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = push_swap
 
 # Files & Command +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 SRCS_DIR = srcs
+OPERARIONS_DIR = operations
 OBJS_DIR = objs
 #OBJS_DIR = ./objs
 
@@ -23,16 +24,22 @@ SRCS = $(addprefix $(SRCS_DIR)/, \
 		process_args.c \
 		debug.c \
 		check_sort.c \
+		sort_under_3args.c \
+		utils.c \
+		make_compression.c \
+		$(addprefix operations/, \
 		util_swap.c \
 		util_push.c \
 		util_rotate.c \
 		util_reverse_rotate.c \
+		) \
 		)
+
 OBJS = $(SRCS:.c=.o)
 #OBJS	= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -I./libft
+CFLAGS	= -Wall -Wextra -Werror -I./libft -I./srcs
 RM		= rm -f
 
 # Libft & Debug +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
