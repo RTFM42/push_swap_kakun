@@ -52,10 +52,8 @@ void	presort(t_info *status)
 {
 	int		i;
 	int		j;
-	t_node	**arry;
 
 	status->status = OK_SORT;
-	arry = status->arry;
 	i = 0;
 	while (i < status->list_size)
 	{
