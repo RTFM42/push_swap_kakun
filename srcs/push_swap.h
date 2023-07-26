@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:51:08 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/26 14:30:19 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:56:48 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define NODE_ERROR 5
 # define ARRY_ERROR 6
 # define SAME_ARGS 6
+# define NO_ARGS 7
 
 typedef struct s_node {
 	struct s_node	*prev;
@@ -64,7 +65,8 @@ void	swap_check_args(t_info *status, int i, int j);
 void	make_compression(t_info *status);
 
 //check_sort
-void	check_sort(t_info *status);
+void	check_sort(t_info *status, int argc, char *argv[]);
+void	check_args(t_info *status, int argc, char *argv[]);
 
 //less or 3args sort
 void	sort_2args(t_node *node);

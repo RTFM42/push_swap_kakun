@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/26 14:32:07 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:47:25 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 		i++;
 	}
 	status->list_size = listsize;
-	check_sort(status);
+	check_sort(status, argc, argv);
 }
 
 void	make_dummy_node(t_info *status)
