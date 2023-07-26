@@ -6,7 +6,7 @@
 /*   By: tokazaki <tokazaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:07:50 by tokazaki          #+#    #+#             */
-/*   Updated: 2023/07/25 21:10:04 by tokazaki         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:32:07 by tokazaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,22 @@ void	process_args_and_make_structs(int argc, char *argv[], t_info *status)
 	while (i < argc && status->status == 0)
 	{
 		j = 0;
-		while (argv[i][j] != '\0' && status->status == 0 && check_num(argv[i], status) == 0)
+		while (argv[i][j] != '\0' && status->status == 0 \
+				&& check_num(&argv[i][j], status) == 0)
 		{
 			count = 0;
 			make_node(ps_atoi(&argv[i][j], status, &count), status);
 			j += count;
 			listsize++;
 		}
+		if (status->status != 0)
+			return ;
 		i++;
 	}
 	status->list_size = listsize;
 	check_sort(status);
 }
 
-//引数が１つの場合は戻す
-void	check_node(t_info *status)
-{
-	t_node	*a_node;
-
-	a_node = status->a_node;
-	if (a_node->next == a_node->prev)
-		status->status = ONE_ARG;
-}
-
-//dummynodeを作成する
 void	make_dummy_node(t_info *status)
 {
 	t_node	*tmp_node;
@@ -73,31 +65,6 @@ void	make_dummy_node(t_info *status)
 	tmp_node->prev = status->b_node;
 }
 
-//構造体のアドレスの配列を作成する
-void	make_arry(t_info *status)
-{
-	int		i;
-	t_node	*node;
-
-	i = 0;
-	status->arry = (t_node **)malloc(sizeof(t_node *) * status->list_size + 1);
-	if (!status->arry)
-	{
-		status->status = -20;
-		return ;
-	}
-	node = status->a_node;
-	node = node->next;
-	while (node->value != LONG_MAX)
-	{
-		status->arry[i] = node;
-		node = node->next;
-		i++;
-	}
-	status->arry[i] = status->a_node;
-}
-
-//nodeを作成する
 void	make_node(int value, t_info *status)
 {
 	t_node	*node;
